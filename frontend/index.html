@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Study Notes App</title>
+</head>
+<body>
+  <h1>Study Notes App</h1>
+
+  <button onclick="getNotes()">Get Notes</button>
+
+  <ul id="notes"></ul>
+
+  <script>
+    async function getNotes() {
+      const res = await fetch('/api/notes');
+      const data = await res.json();
+
+      const notesList = document.getElementById('notes');
+      notesList.innerHTML = '';
+
+      data.forEach(note => {
+        const li = document.createElement('li');
+        li.innerText = note.text;
+        notesList.appendChild(li);
+      });
+    }
+  </script>
+</body>
+</html>
