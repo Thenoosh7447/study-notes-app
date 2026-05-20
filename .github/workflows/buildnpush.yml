@@ -12,15 +12,22 @@ jobs:
     
     steps:
       - uses: actions/checkout@v4
-    
-      - name: Build Docker Files
-        run: | 
-             docker build -t sna-fend-img:latest ./frontend
-             docker build -t sna-bend-img:latest ./backend
-             docker build -t sna-nx-img:latest ./nginx
-      - uses: docker/login-action@v4
+
+      - uses: docker/login-action@v3
         with:
           username: ${{secrets.DOCKERHUB_ACTIONS_USERNAME}}
           password: ${{secrets.DOCKERHUB_ACTIONS_PAT}}
+    
+      - name: Build Docker Files
+        run: | 
+             docker build -t thenoosh/sna-fend-img:latest ./frontend
+             docker build -t thenoosh/sna-bend-img:latest ./backend
+             docker build -t thenoosh/sna-nx-img:latest ./nginx
+
+      - name: Docker Push Images
+        run: |
+          docker push thenoosh/sna-fend-img:latest
+          docker push thenoosh/sna-bend-img:latest
+          docker push thenoosh/sna-nx-img:latest
 
       
