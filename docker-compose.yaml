@@ -1,0 +1,48 @@
+services:
+  nginx:
+    build: ./nginx
+    image: sna-nx-img
+    container_name: sna-ncon
+    networks:
+      - sna-nw-b
+    ports: 
+      - "80:80"
+    depends_on:
+      - frontend
+
+  frontend:
+    build: ./frontend
+    image: sna-fend-img
+    container_name: sna-fcon
+    networks: 
+      - sna-nw-b
+    depends_on: 
+      - backend
+
+  backend:
+    build: ./backend
+    image: sna-bend-img
+    container_name: sna-bcon
+    networks: 
+      - sna-nw-b
+    env_file:
+      - .env
+    depends_on:
+      - mongodb
+    
+  mongodb:
+    image: mongo:8.2
+    container_name: sna-mcon
+    networks:
+      - sna-nw-b
+    volumes:
+      - sna-data:/data/db 
+    env_file:
+      - .env
+
+
+networks:
+  sna-nw-b:
+
+volumes:
+  sna-data:
