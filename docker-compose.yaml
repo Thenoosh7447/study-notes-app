@@ -1,7 +1,6 @@
 services:
   nginx:
-    build: ./nginx
-    image: sna-nx-img
+    image: thenoosh/sna-nx-img:latest
     container_name: sna-ncon
     networks:
       - sna-nw-b
@@ -11,8 +10,7 @@ services:
       - frontend
 
   frontend:
-    build: ./frontend
-    image: sna-fend-img
+    image: thenoosh/sna-fend-img:latest
     container_name: sna-fcon
     networks: 
       - sna-nw-b
@@ -20,8 +18,7 @@ services:
       - backend
 
   backend:
-    build: ./backend
-    image: sna-bend-img
+    image: thenoosh/sna-bend-img:latest
     container_name: sna-bcon
     networks: 
       - sna-nw-b
