@@ -57,6 +57,9 @@ jobs:
       - name: Check secret exists
         run: |
           echo "${{ secrets.SSH_KEY }}" | head -n 2
+      - name: Verify SSH key length
+        run: |
+          echo "${{ secrets.SSH_KEY }}" | wc -c
       - uses: appleboy/ssh-action@v1.0.3
         with:
           host: "3.110.173.232"
