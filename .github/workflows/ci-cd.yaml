@@ -1,4 +1,4 @@
-name: build and push image
+name: Build Push Image and Deploy
 
 on: 
   push:
@@ -47,6 +47,23 @@ jobs:
           tags: |
             ${{ matrix.image }}:latest
             ${{ matrix.image }}:${{ github.sha }}
+
+
+  deploy:
+    needs: buildnpush
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: appleboy/actions@v1.0.3
+        with:
+          host: "3.110.173.232"
+          username: ubuntu
+          key: ${{ secrets.AWS_SSH_KEY }}
+          script: |
+            git clone git@github.com:Thenoosh7447/study-notes-app.git
+            git pull
+            docker compose pull
+            docker compose up -d
 
 
     
