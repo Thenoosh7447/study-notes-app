@@ -60,8 +60,7 @@ jobs:
           username: ubuntu
           key: ${{ secrets.AWS_SSH_KEY }}
           script: |
-            git clone git@github.com:Thenoosh7447/study-notes-app.git
-            git pull
+            cd /home/ubuntu/study-notes-app
             docker compose pull
             docker compose up -d
 
