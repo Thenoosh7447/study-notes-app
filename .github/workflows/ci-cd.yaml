@@ -54,7 +54,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: appleboy/actions@v1.0.3
+      - uses: appleboy/ssh-actions@v1.0.3
         with:
           host: "3.110.173.232"
           username: ubuntu
