@@ -46,7 +46,7 @@ jobs:
           push: true
           tags: |
             ${{ matrix.image }}:latest
-            ${{ matrix.image }}:{{ github.sha }}
+            ${{ matrix.image }}:${{ github.sha }}
 
 
     
