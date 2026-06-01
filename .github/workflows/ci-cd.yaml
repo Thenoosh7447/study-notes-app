@@ -58,7 +58,7 @@ jobs:
         with:
           host: "3.110.173.232"
           username: ubuntu
-          key: ${{ secrets.AWS_SSH_KEY }}
+          key: ${{ secrets.SSH_KEY }}
           script: |
             cd /home/ubuntu/study-notes-app
             docker compose pull
