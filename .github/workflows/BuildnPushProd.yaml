@@ -20,11 +20,11 @@ jobs:
 
           - name: backend
             context: ./backend
-            image: sna-bend-img
+            image: thenoosh/sna-bend-img
 
           - name: nginx
             context: ./nginx
-            image: sna-nx-img
+            image: thenoosh/sna-nx-img
       
     steps:
       - name: Checkout Repository
