@@ -54,6 +54,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Check secret exists
+        run: |
+          echo "${{ secrets.SSH_KEY }}" | head -n 2
       - uses: appleboy/ssh-action@v1.0.3
         with:
           host: "3.110.173.232"
