@@ -44,7 +44,7 @@ jobs:
         with:
           context: ${{ matrix.context }}
           push: true
-          tags:  
+          tags: |
             ${{ matrix.image }}:latest
             ${{ matrix.image }}:${{ github.sha }}
 
