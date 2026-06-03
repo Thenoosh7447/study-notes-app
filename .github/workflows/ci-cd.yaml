@@ -1,11 +1,11 @@
-name: Build Push Image and Deploy
+name: Build and Deploy
 
 on: 
   push:
-    branches:
-      - main
-
+    branches: [ main ]
+  
   workflow_dispatch:
+
 
 jobs:
   buildnpush:
@@ -24,10 +24,10 @@ jobs:
 
           - name: nginx
             context: ./nginx
-            image: thenoosh/sna-nx-img
-      
+            image: sna-nx-img
+
     steps:
-      - name: Checkout Repository
+      - name: Repository Checkout
         uses: actions/checkout@v4
 
       - name: Docker Setup Buildx
@@ -39,42 +39,16 @@ jobs:
           username: ${{ secrets.DOCKERHUB_ACTIONS_USERNAME }}
           password: ${{ secrets.DOCKERHUB_ACTIONS_PAT }}
 
-      - name: Docker Build and Push
+      - name: Docker Build Push
         uses: docker/build-push-action@v6
         with:
           context: ${{ matrix.context }}
           push: true
-          tags: |
+          tags:  
             ${{ matrix.image }}:latest
             ${{ matrix.image }}:${{ github.sha }}
 
+            
+          
 
-  deploy:
-    needs: buildnpush
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Check secret exists
-        run: |
-          echo "${{ secrets.SSH_KEY }}" | head -n 2
-      - name: Verify SSH key length
-        run: |
-          echo "${{ secrets.SSH_KEY }}" | wc -c
-      - uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: "3.110.173.232"
-          username: ubuntu
-          key: ${{ secrets.SSH_KEY }}
-          script: |
-            cd /home/ubuntu/study-notes-app
-            docker compose pull
-            docker compose up -d
-
-
-    
-      
-      
-
-      
-
-    
+   
