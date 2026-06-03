@@ -48,7 +48,19 @@ jobs:
             ${{ matrix.image }}:latest
             ${{ matrix.image }}:${{ github.sha }}
 
-            
-          
+  deploy:
+    needs: buildnpush
+    runs-on: ubuntu-latest
 
-   
+    steps:
+      - name: Deploying
+        uses: appleboy/action-version@v1.0.3
+        with:
+          host: "13.207.38.154"
+          username: ubuntu
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /home/ubuntu/study-notes-app
+            docker compose pull
+            docker compose up -d
+         
