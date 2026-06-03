@@ -1,0 +1,19 @@
+name: Compose Down
+
+on: 
+  workflow_dispatch:
+
+
+jobs:  
+  undeploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: "13.207.38.154"
+          username: ubuntu
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /home/ubuntu/study-notes-app
+            docker compose down
