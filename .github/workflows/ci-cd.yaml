@@ -24,7 +24,7 @@ jobs:
 
           - name: nginx
             context: ./nginx
-            image: sna-nx-img
+            image: thenoosh/sna-nx-img
 
     steps:
       - name: Repository Checkout
