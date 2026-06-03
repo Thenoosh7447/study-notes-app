@@ -56,11 +56,13 @@ jobs:
       - name: Deploying
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: "13.207.38.154"
-          username: ubuntu
+          host: ${{ secrets.EC2_HOST }} 
+          username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd /home/ubuntu/study-notes-app
+            git pull
             docker compose pull
             docker compose up -d
+            docker ps
          
