@@ -54,7 +54,7 @@ jobs:
 
     steps:
       - name: Deploying
-        uses: appleboy/action-version@v1.0.3
+        uses: appleboy/ssh-version@v1.0.3
         with:
           host: "13.207.38.154"
           username: ubuntu
